@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show liked feed followers following discover ]
+  before_action { authorize(@user || User) }
+
+  def feed
+    @posts = @user.feed
+  end
+
+  def discover
+    @posts = @user.discover
+  end
 
   private
 
